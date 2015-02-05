@@ -118,9 +118,15 @@ var MvcGrid = (function () {
                 if (grid.reloadStarted) {
                     grid.reloadStarted(grid);
                 }
+                
+                var sourceUrl;
+                if (grid.sourceUrl.indexOf("?") > -1)
+                    sourceUrl = grid.sourceUrl + '&' + query
+                else
+                    sourceUrl = grid.sourceUrl + '?' + query
 
                 $.ajax({
-                    url: grid.sourceUrl + '?' + query
+                    url: sourceUrl
                 }).success(function (result) {
                     if (grid.reloadEnded) {
                         grid.reloadEnded(grid);
